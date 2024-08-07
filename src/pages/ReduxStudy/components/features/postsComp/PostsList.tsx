@@ -1,6 +1,7 @@
 import { PostMessageFormat } from '@/types/interface'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import AddPostForm from './components/AddPostForm'
 
 const PostsList = () => {
 
@@ -8,8 +9,6 @@ const PostsList = () => {
   const posts = useSelector((state: any) => {
     return state.posts.postsArr
   })
-
-
 
   // 将节点渲染出来
   const renderedPosts = posts.map((posts:PostMessageFormat) => (
@@ -25,6 +24,7 @@ const PostsList = () => {
       <section className='posts-list'>
         <h2>Posts</h2>
         {renderedPosts}
+        <AddPostForm />
       </section>
     </div>
   )

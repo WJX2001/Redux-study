@@ -9,7 +9,7 @@ const AppComp = () => {
         defaultActiveKey="1"
         items={[
           {
-            label: '计算机案例',
+            label: '计算器案例',
             key: '1',
             children: <Counter />,
           },

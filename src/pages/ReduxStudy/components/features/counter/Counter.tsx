@@ -12,9 +12,9 @@ const Counter = () => {
   const dispatch = useDispatch();
 
   // 另外一种写法
-  const hanldeFunc = () => {
-    store.dispatch({ type: 'counter/increment' });
-  };
+  // const hanldeFunc = () => {
+  //   store.dispatch({ type: 'counter/increment' });
+  // };
   return (
     <div>
       <div>

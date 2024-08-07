@@ -8,11 +8,15 @@ const initialState = [
 export const postSlice = createSlice({
   name: 'posts',
   initialState: {
-    postsArr: initialState
+    postsArr: initialState,
   },
-  reducers: {},
+  reducers: {
+    postAdded(state, action) {
+      state.postsArr.push(action.payload);
+    },
+  },
 });
 
-
+export const { postAdded } = postSlice.actions;
 
 export default postSlice.reducer;
