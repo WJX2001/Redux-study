@@ -1,7 +1,6 @@
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
-import store from '../../StoreComp/store';
 import { decrement, increment, incrementByAmount } from './counterSlice';
 const Counter = () => {
   // 使用useSelector 从store中读取数据
@@ -18,8 +17,9 @@ const Counter = () => {
   return (
     <div>
       <div>
-        
-        <Button onClick={() => dispatch(incrementByAmount(5))}>带着payload</Button>
+        <Button onClick={() => dispatch(incrementByAmount(5))}>
+          带着payload
+        </Button>
         <Button onClick={() => dispatch(increment())}>Increment value</Button>
         {/* <Button onClick={hanldeFunc}>Increment value</Button> */}
         <Button onClick={() => dispatch(decrement())}>Decrememt value</Button>

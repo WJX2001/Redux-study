@@ -2,6 +2,8 @@ import { PostMessageFormat } from '@/types/interface'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import AddPostForm from './components/AddPostForm'
+import { Button } from 'antd'
+import { history } from '@umijs/max'
 
 const PostsList = () => {
 
@@ -18,6 +20,13 @@ const PostsList = () => {
     </article>
   ))
 
+  // 跳转
+  const routeChange = () => {
+    history.push({
+      pathname:'/reduxStudy/singlePage',
+      search: `?pageIndex=1`
+    })
+  }
 
   return (
     <div>
@@ -25,6 +34,7 @@ const PostsList = () => {
         <h2>Posts</h2>
         {renderedPosts}
         <AddPostForm />
+        <Button onClick={routeChange}>跳转</Button>
       </section>
     </div>
   )
