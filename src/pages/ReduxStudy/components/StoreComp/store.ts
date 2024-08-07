@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
+import postsReducer from '../features/postsComp/postsSlice'
 // 创建了Redux store
 export default configureStore({
   /**
@@ -8,18 +9,19 @@ export default configureStore({
    */
   reducer: {
     counter: counterReducer,
+    posts: postsReducer
   },
 });
 
-const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
-});
+// const store = configureStore({
+//   reducer: {
+//     counter: counterReducer,
+//   },
+// });
 
-/**
- * configureStore 需要提取RootState 和 AppDispatch类型，以便在组件中正确使用
- * 更好的做法是 创建 useDispatch 和 useSelector 钩子
- */
+// /**
+//  * configureStore 需要提取RootState 和 AppDispatch类型，以便在组件中正确使用
+//  * 更好的做法是 创建 useDispatch 和 useSelector 钩子
+//  */
 
-export type RootState = ReturnType<typeof store.getState>;
+// export type RootState = ReturnType<typeof store.getState>;
