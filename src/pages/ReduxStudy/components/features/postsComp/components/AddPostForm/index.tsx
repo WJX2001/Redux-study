@@ -50,7 +50,7 @@ const AddPostForm: React.FC<Props> = (props) => {
       },
       {
         label: '文章作者',
-        name: 'postAuthor',
+        name: 'user',
         allowclear: true,
         colProps: {
           span: 24,

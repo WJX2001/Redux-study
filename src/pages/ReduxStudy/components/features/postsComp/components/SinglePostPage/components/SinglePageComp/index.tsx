@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postUpdated, selectPostById } from '../../../../postsSlice';
 import AddPostForm from '../../../AddPostForm';
+import PostContent from '../../../PostContent';
+import { PostMessageFormat } from '@/types/interface';
 
 const SinglePageComp = () => {
   const [searchParamData] = useSearchParams();
@@ -15,7 +17,6 @@ const SinglePageComp = () => {
   //   return state.posts.postsArr.find((post) => post.id === postId);
   // });
 
-
   const post = useSelector((state) => selectPostById(state, postId));
 
   const dispatch = useDispatch();
@@ -26,32 +27,30 @@ const SinglePageComp = () => {
 
   return (
     <div>
-      <section>
-        <article className="post">
-          <h2>{post.title}</h2>
-          <p className="post-content">{post.content}</p>
-        </article>
-      </section>
+      <PostContent
+        postContemt={[post]}
+        handleRouteChange={() => history.go(-1)}
+      />
       <Button type="primary" onClick={() => setEditModalOpen(true)}>
         编辑文章内容
       </Button>
 
       <AddPostForm
         open={editModalOpen}
-        title={"编辑文章内容"}
-        type='edit'
+        title={'编辑文章内容'}
+        type="edit"
         changeOpenHandle={() => {
           setEditModalOpen(false);
         }}
-        onFinish={(value: {
-          title: string;
-          content: string;
-        }) => {
-          dispatch(postUpdated({
-            id: postId,
-            title: value.title,
-            content: value.content
-          }))
+        onFinish={(value: PostMessageFormat) => {
+          dispatch(
+            postUpdated({
+              id: postId,
+              title: value.title,
+              content: value.content,
+              user:value.user
+            }),
+          );
           setEditModalOpen(false);
         }}
       />

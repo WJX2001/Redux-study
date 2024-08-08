@@ -19,13 +19,13 @@ export const postSlice = createSlice({
         state.postsArr.push(action.payload);
       },
       // @ts-ignore
-      prepare(title, content,userId) {
+      prepare(title, content, userId) {
         return {
           payload: {
             id: nanoid(),
             title,
             content,
-            user: userId
+            user: userId,
           },
         };
       },

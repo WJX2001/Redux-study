@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddPostForm from './components/AddPostForm';
 import PostContent from './components/PostContent';
 import { postAdded, selectAllPosts } from './postsSlice';
+import { PostMessageFormat } from '@/types/interface';
 const PostsList = () => {
   const [openAddModal, setOpenAddModal] = useState<boolean>(false);
 
@@ -31,8 +32,8 @@ const PostsList = () => {
         type="add"
         open={openAddModal}
         changeOpenHandle={() => setOpenAddModal(false)}
-        onFinish={(values: { title: string; content: string }) => {
-          dispatch(postAdded(values.title, values.content));
+        onFinish={(values: PostMessageFormat) => {
+          dispatch(postAdded(values.title, values.content,values.user));
           setOpenAddModal(false);
         }}
       />
