@@ -441,4 +441,5 @@ export interface PostMessageFormat {
   id: string;
   title: string;
   content: string;
+  user: string;
 }

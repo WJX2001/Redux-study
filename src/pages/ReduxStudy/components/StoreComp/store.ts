@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import postsReducer from '../features/postsComp/postsSlice'
+import usersReducer from '../features/users/userSlice';
 // 创建了Redux store
 export default configureStore({
   /**
@@ -9,7 +10,8 @@ export default configureStore({
    */
   reducer: {
     counter: counterReducer,
-    posts: postsReducer
+    posts: postsReducer,
+    users: usersReducer
   },
 });
 

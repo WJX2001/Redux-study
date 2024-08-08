@@ -20,6 +20,14 @@ const AddPostForm: React.FC<Props> = (props) => {
   // 将表格数据回显
   const post = useSelector((state) => selectPostById(state, postId));
 
+  // 获取用户下拉框
+  const usersOption = useSelector((state:any) => state.users).map((item) => {
+    return {
+      label: item.name,
+      value: item.id,
+    };
+  });
+  
   useEffect(() => {
     if (open && type === 'edit') {
       formRef.current?.setFieldsValue(post);
@@ -36,8 +44,23 @@ const AddPostForm: React.FC<Props> = (props) => {
           span: 24,
         },
         type: FormItemType.TEXT,
-        labelCol: { span: 6 },
-        wrapperCol: { span: 18 },
+        labelCol: { span: 5 },
+        wrapperCol: { span: 19 },
+        rules: [{ required: true, message: '请输入文章标题' }],
+      },
+      {
+        label: '文章作者',
+        name: 'postAuthor',
+        allowclear: true,
+        colProps: {
+          span: 24,
+        },
+        type: FormItemType.SELECT,
+        options: usersOption,
+        allowClear: true,
+        labelCol: { span: 5 },
+        wrapperCol: { span: 19 },
+        rules: [{ required: true, message: '请选择文章作者' }],
       },
       {
         label: '文章内容',
@@ -47,11 +70,12 @@ const AddPostForm: React.FC<Props> = (props) => {
           span: 24,
         },
         type: FormItemType.TEXT,
-        labelCol: { span: 6 },
-        wrapperCol: { span: 18 },
+        labelCol: { span: 5 },
+        wrapperCol: { span: 19 },
+        rules: [{ required: true, message: '请输入文章内容' }],
       },
     ],
-    [],
+    [usersOption],
   );
 
   return (

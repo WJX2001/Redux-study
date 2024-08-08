@@ -47,15 +47,12 @@ const SinglePageComp = () => {
           title: string;
           content: string;
         }) => {
-          if(value.title && value.content) {
-            dispatch(postUpdated({
-              id: postId,
-              title: value.title,
-              content: value.content
-            }))
-          }
+          dispatch(postUpdated({
+            id: postId,
+            title: value.title,
+            content: value.content
+          }))
           setEditModalOpen(false);
-          // history.go(-1);
         }}
       />
     </div>
