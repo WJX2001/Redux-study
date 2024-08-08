@@ -1,6 +1,6 @@
+import { ProDescriptionsItemProps } from '@ant-design/pro-components';
 import { ReactNode } from 'react';
 import { ErrorShowType } from './enum';
-import { ProDescriptionsItemProps } from '@ant-design/pro-components';
 
 // 与后端约定的响应数据格式
 export interface ResponseStructure {
@@ -212,8 +212,8 @@ export interface BatchIntegrationStateProps {
     readStrategyCode: number;
     writeStrategyCode: number;
     parallel: number;
-    sourceHint:'',
-    targetHint:'',
+    sourceHint: '';
+    targetHint: '';
   };
   incStrategy: {
     filterCondition: string;
@@ -230,8 +230,8 @@ export interface BatchIntegrationStateProps {
     deleteCondition: string;
     etlCmpDCondition: string;
     etlCmpICondition: string;
-    sourceHint:'',
-    targetHint:'',
+    sourceHint: '';
+    targetHint: '';
   };
   preJobFollows: FollowDataSource[];
   postJobFollows: FollowDataSource[];
@@ -331,13 +331,12 @@ export interface FollowDataSource {
   updateTime: string;
 }
 
-
 // 调度周期管理 主表单数据
 export interface SchedulePeriodManageMainFormData {
   triggerName: string;
   schedulerName: string;
   batchId: string;
-  jobIds:string;
+  jobIds: string;
   classType: string;
   cron: string;
   startDate: string;
@@ -350,18 +349,18 @@ export interface SchedulePeriodManageMainFormData {
   memo: string;
   kettleId: string;
   executeType: number;
-  params: [{name: string,value: string}]
+  params: [{ name: string; value: string }];
   flowName: string;
   sourceSystem: number;
-  jobDisplayName: string
+  jobDisplayName: string;
 }
 
-export interface KettleExtractDataSourceFormData{
+export interface KettleExtractDataSourceFormData {
   sourceId: string;
-  systemCode:string;
+  systemCode: string;
   sourceName: string;
   sourceDesc: string;
-  dbName:string;
+  dbName: string;
   hostIp: string;
   portNumber: string;
   userName: string;
@@ -374,15 +373,13 @@ export interface KettleExtractDataSourceFormData{
   dbCheckStatus: string;
 }
 
-
-
-
 // table通用接口
-export  interface CustomProDescriptionsItemProps extends ProDescriptionsItemProps {
+export interface CustomProDescriptionsItemProps
+  extends ProDescriptionsItemProps {
   width?: number;
   fixed?: string;
   align?: string;
-  sorter?: true
+  sorter?: true;
 }
 
 // 离线加工主表单部分单行数据
@@ -392,7 +389,7 @@ export interface OfflineProcessingTableData {
   classType: string;
   batchId: string;
   jobName: string;
-  sourceSystem?: string
+  sourceSystem?: string;
 }
 
 // 离线加工详情页面基础信息
@@ -412,7 +409,7 @@ export interface OfflineProcessingDetailBaseInfo {
   totalNum: number;
   successNum: number;
   failNum: number;
-  unableRunNum: number
+  unableRunNum: number;
   allFlag: number;
   writeNum: number;
   jobConfigType: string;
@@ -423,23 +420,36 @@ export interface OfflineProcessingDetailBaseInfo {
 }
 
 // 离线加工详情页面任务类型差异化配置
-export interface OfflineProcessingDetailTaskTypeConfig 
-  {
-    label: string;
-    value: string;
-    desc: string;
-    taskType: string;
-    // 实例页面基础信息表单label和key的映射关系
-    baseInfoLabels: Array<{ label: string; key: string }>;
-    hasStepList: boolean;
-    hasAssemblyLog: boolean;
-  }
+export interface OfflineProcessingDetailTaskTypeConfig {
+  label: string;
+  value: string;
+  desc: string;
+  taskType: string;
+  // 实例页面基础信息表单label和key的映射关系
+  baseInfoLabels: Array<{ label: string; key: string }>;
+  hasStepList: boolean;
+  hasAssemblyLog: boolean;
+}
 
-
-  // 报文格式
+// 报文格式
 export interface PostMessageFormat {
   id: string;
   title: string;
   content: string;
   user: string;
+}
+
+export interface reduxState {
+  couter: {
+    value: number;
+  };
+  posts: {
+    error: string;
+    postsArr: PostMessageFormat[];
+    status: string;
+  };
+  user: {
+    id: string;
+    name: string;
+  };
 }
