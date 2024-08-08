@@ -14,9 +14,18 @@ export const postSlice = createSlice({
     postAdded(state, action) {
       state.postsArr.push(action.payload);
     },
+    postUpdated(state, action) {
+      // 更新文章内容
+      const { id, title, content } = action.payload;
+      const existingPost = state.postsArr.find((post) => post.id === id);
+      if (existingPost) {
+        existingPost.title = title;
+        existingPost.content = content;
+      }
+    },
   },
 });
 
-export const { postAdded } = postSlice.actions;
+export const { postAdded, postUpdated } = postSlice.actions;
 
 export default postSlice.reducer;

@@ -21,7 +21,8 @@ import {
   ProFormTreeSelect,
   ProFormUploadButton,
 } from '@ant-design/pro-components';
-import { Col } from 'syfed-ui';
+// import { Col } from 'syfed-ui';
+import { Col } from 'antd';
 import MyAutoComplete from './components/MyAutoComplete';
 import { FormFieldPropsForApply } from './type';
 import { uuid } from '@/utils';

@@ -1,49 +1,74 @@
-import { nanoid } from '@reduxjs/toolkit';
-import { Button, Form, Input } from 'antd';
+import CommonModalForm from '@/components/commonModalForm';
+import { FormItemType } from '@/types/enum';
+import { Button, Form, Input, Modal } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
-import { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { postAdded } from '../../postsSlice';
 
-const AddPostForm = () => {
+interface Props {
+  open: boolean;
+  changeOpenHandle: () => void;
+  onFinish: (value: { title: string; content: string }) => void;
+}
+const AddPostForm: React.FC<Props> = (props) => {
+  const { open, changeOpenHandle, onFinish } = props;
+
   const { Item } = Form;
   const dispatch = useDispatch();
   const formRef = useRef(null);
   // 提交函数
-  const onFinish = (values: { title: string; content: string }) => {
-    console.log('Success:', values);
-    console.log(formRef,'1')
-    // 进行修改
-    if (values.title && values.content) {
-      dispatch(
-        postAdded({
-          id: nanoid(),
-          title: values.title,
-          content: values.content,
-        }),
-      );
-      formRef?.current?.resetFields()
-    }
-  };
+  // const onFinish = (values: { title: string; content: string }) => {
+  //   console.log('Success:', values);
+  //   console.log(formRef, '1');
+  //   // 进行修改
+  //   if (values.title && values.content) {
+  //     dispatch(
+  //       postAdded({
+  //         id: nanoid(),
+  //         title: values.title,
+  //         content: values.content,
+  //       }),
+  //     );
+  //     formRef?.current?.resetFields();
+  //   }
+  // };
+
+  const formItem = useMemo(
+    () => [
+      {
+        label: '文章标题',
+        name: 'title',
+        allowclear: true,
+        colProps: {
+          span: 24,
+        },
+        type: FormItemType.TEXT,
+        labelCol: { span: 6 },
+        wrapperCol: { span: 18 },
+      },
+      {
+        label: '文章内容',
+        name: 'content',
+        allowclear: true,
+        colProps: {
+          span: 24,
+        },
+        type: FormItemType.TEXT,
+        labelCol: { span: 6 },
+        wrapperCol: { span: 18 },
+      },
+    ],
+    [],
+  );
 
   return (
     <div>
-      <section>
-        <h2>添加新文章</h2>
-        <Form onFinish={onFinish} ref={formRef}>
-          <Item label="文章标题" name="title">
-            <Input placeholder="请输入文章标题" style={{ width: 400 }} />
-          </Item>
-          <Item label="文章内容" name="content">
-            <TextArea placeholder="请输入文章内容" style={{ width: 400 }} />
-          </Item>
-          <Item>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Item>
-        </Form>
-      </section>
+      <CommonModalForm
+        open={open}
+        changeOpenHandle={changeOpenHandle}
+        onFinish={onFinish}
+        formItems={formItem}
+      />
     </div>
   );
 };
