@@ -26,6 +26,11 @@ export const postSlice = createSlice({
   },
 });
 
+export const selectAllPosts = (state: any) => state.posts.postsArr;
+
+export const selectPostById = (state, postId) =>
+  state.posts.postsArr.find((post) => post.id === postId);
+
 export const { postAdded, postUpdated } = postSlice.actions;
 
 export default postSlice.reducer;

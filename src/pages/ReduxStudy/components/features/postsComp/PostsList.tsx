@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddPostForm from './components/AddPostForm';
 import styles from './PostsList.less';
-import { postAdded } from './postsSlice';
+import { postAdded, selectAllPosts } from './postsSlice';
 import { nanoid } from '@reduxjs/toolkit';
 const PostsList = () => {
   const [openAddModal, setOpenAddModal] = useState<boolean>(false);
@@ -13,9 +13,11 @@ const PostsList = () => {
   const dispatch = useDispatch();
 
   // 使用useSelector 从Redux store中读取数据
-  const posts = useSelector((state: any) => {
-    return state.posts.postsArr;
-  });
+  // const posts = useSelector((state: any) => {
+  //   return state.posts.postsArr;
+  // });
+
+  const posts = useSelector(selectAllPosts)
 
   // 跳转
   const routeChange = (postId: string) => {
@@ -49,13 +51,15 @@ const PostsList = () => {
           新增文章
         </Button>
       </div>
-      <section className="posts-list">
+      <section className={styles['posts-list']}>
         <div className={styles['posts-list-header']}>
           <h2>Posts</h2>
         </div>
         {renderedPosts}
       </section>
       <AddPostForm
+        title="新建文章"
+        type='add'
         open={openAddModal}
         changeOpenHandle={() => setOpenAddModal(false)}
         onFinish={(values: { title: string; content: string }) => {

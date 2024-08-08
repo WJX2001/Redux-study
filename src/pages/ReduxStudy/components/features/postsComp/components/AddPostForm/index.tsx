@@ -1,37 +1,30 @@
 import CommonModalForm from '@/components/commonModalForm';
 import { FormItemType } from '@/types/enum';
-import { Button, Form, Input, Modal } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
-import React, { useMemo, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSearchParams } from '@umijs/max';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { selectPostById } from '../../postsSlice';
 
 interface Props {
   open: boolean;
+  title: string;
+  type: 'add' | 'edit';
   changeOpenHandle: () => void;
   onFinish: (value: { title: string; content: string }) => void;
 }
 const AddPostForm: React.FC<Props> = (props) => {
-  const { open, changeOpenHandle, onFinish } = props;
-
-  const { Item } = Form;
-  const dispatch = useDispatch();
+  const { open, changeOpenHandle, onFinish,type } = props;
+  const [searchParamData] = useSearchParams();
+  const postId = searchParamData.get('pageIndex');
   const formRef = useRef(null);
-  // 提交函数
-  // const onFinish = (values: { title: string; content: string }) => {
-  //   console.log('Success:', values);
-  //   console.log(formRef, '1');
-  //   // 进行修改
-  //   if (values.title && values.content) {
-  //     dispatch(
-  //       postAdded({
-  //         id: nanoid(),
-  //         title: values.title,
-  //         content: values.content,
-  //       }),
-  //     );
-  //     formRef?.current?.resetFields();
-  //   }
-  // };
+  // 将表格数据回显
+  const post = useSelector((state) => selectPostById(state, postId));
+
+  useEffect(() => {
+    if (open && type === 'edit') {
+      formRef.current?.setFieldsValue(post);
+    }
+  }, [open,type]);
 
   const formItem = useMemo(
     () => [
@@ -64,10 +57,12 @@ const AddPostForm: React.FC<Props> = (props) => {
   return (
     <div>
       <CommonModalForm
+        title={props.title}
         open={open}
         changeOpenHandle={changeOpenHandle}
         onFinish={onFinish}
         formItems={formItem}
+        ref={formRef}
       />
     </div>
   );

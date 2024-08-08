@@ -6,7 +6,7 @@ const AppComp = () => {
   return (
     <>
       <Tabs
-        defaultActiveKey="1"
+        defaultActiveKey="2"
         items={[
           {
             label: '计算器案例',
